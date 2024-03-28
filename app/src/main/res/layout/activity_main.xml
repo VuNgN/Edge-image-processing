@@ -21,14 +21,26 @@
         android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:stepSize="1.0"
         android:valueFrom="0.0"
         android:valueTo="10.0"
-        android:stepSize="1.0"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/color_picker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <Button
+        android:id="@+id/color_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/slider"
         app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

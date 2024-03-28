@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation("com.github.skydoves:colorpickerview:2.3.0")
+
     implementation("org.opencv:opencv:4.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

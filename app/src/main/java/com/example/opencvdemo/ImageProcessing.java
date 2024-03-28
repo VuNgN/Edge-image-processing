@@ -26,9 +26,9 @@ public class ImageProcessing {
         edgesMat = cannyEdgeDetector(rgbMat);
     }
 
-    public Bitmap resizeBorderOfEdges(int borderWidth) {
+    public Bitmap resizeBorderOfEdges(int borderWidth, Scalar borderScalar) {
         // Resize borders around edges
-        Mat borderedEdgesMat = getBordered(edgesMat, borderWidth);
+        Mat borderedEdgesMat = getBordered(edgesMat, borderWidth, borderScalar);
 
         // Convert Mat back to Bitmap
         Bitmap resultBitmap = Bitmap.createBitmap(borderedEdgesMat.cols(), borderedEdgesMat.rows(), Bitmap.Config.ARGB_8888);
@@ -58,14 +58,14 @@ public class ImageProcessing {
         return closedMat;
     }
 
-    public static Mat getBordered(Mat image, int width) {
+    public static Mat getBordered(Mat image, int width, Scalar scalar) {
         Mat bg = new Mat(image.size(), CvType.CV_8UC4, new Scalar(0, 0, 0, 0)); // Initialize background as black
         List<MatOfPoint> contours = new ArrayList<>();
         Mat hierarchy = new Mat();
         Imgproc.findContours(image.clone(), contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
 
         for (int i = 0; i < contours.size(); i++) {
-            Imgproc.drawContours(bg, contours, i, new Scalar(0, 0, 0, 255), width);
+            Imgproc.drawContours(bg, contours, i, scalar, width);
         }
 
         return bg;
