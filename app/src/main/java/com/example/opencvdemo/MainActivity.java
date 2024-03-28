@@ -3,6 +3,7 @@ package com.example.opencvdemo;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
         scalar = new Scalar(0, 0, 0, 255);
         iv = findViewById(R.id.image);
         Bitmap newBm = ip.resizeBorderOfEdges(borderWidth, scalar);
+        ImageProcessing ip = new ImageProcessing(bitmap);
+        ImageView iv = findViewById(R.id.image);
+        Matrix matrix = iv.getImageMatrix();
+        matrix.postScale(0.4f, 0.4f, (float) iv.getWidth() / 2, (float) iv.getHeight() / 2);
+        iv.setImageMatrix(matrix);
+        iv.setOnTouchListener(new ZoomInZoomOut());
         iv.setImageBitmap(newBm);
 
         Slider slider = findViewById(R.id.slider);
