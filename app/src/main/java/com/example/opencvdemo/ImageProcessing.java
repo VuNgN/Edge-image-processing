@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
 import org.opencv.android.Utils;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
@@ -58,13 +59,13 @@ public class ImageProcessing {
     }
 
     public static Mat getBordered(Mat image, int width) {
-        Mat bg = new Mat(image.size(), image.type(), new Scalar(255, 255, 255)); // Initialize background as black
+        Mat bg = new Mat(image.size(), CvType.CV_8UC4, new Scalar(0, 0, 0, 0)); // Initialize background as black
         List<MatOfPoint> contours = new ArrayList<>();
         Mat hierarchy = new Mat();
         Imgproc.findContours(image.clone(), contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
 
         for (int i = 0; i < contours.size(); i++) {
-            Imgproc.drawContours(bg, contours, i, new Scalar(0, 0, 0), width);
+            Imgproc.drawContours(bg, contours, i, new Scalar(0, 0, 0, 255), width);
         }
 
         return bg;
